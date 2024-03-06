@@ -1,0 +1,29 @@
+.btn-accent-outline {
+    border: 2px solid var(--accent-secondary);
+    border-radius: 0;
+    padding: 10px 45px;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-accent-outline:hover {
+    border: 2px solid var(--accent-secondary);
+    background: var(--accent-secondary);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-main {
+    background: var(--accent-primary);
+    padding: 10px 25px;
+    transition: all .25s ease-in-out;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-main:hover {
+    background: var(--accent-secondary);
+    text-decoration: none;
+}

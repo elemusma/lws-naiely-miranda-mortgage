@@ -40,6 +40,7 @@ wp_enqueue_style('blog', get_theme_file_uri('/css/sections/blog.css'));
 }
 
 wp_enqueue_style('photo-gallery', get_theme_file_uri('/css/sections/photo-gallery.css'));
+wp_enqueue_style('gutenberg-custom', get_theme_file_uri('/css/sections/gutenberg.css'));
 wp_enqueue_style('footer', get_theme_file_uri('/css/sections/footer.css'));
 wp_enqueue_style('sidebar', get_theme_file_uri('/css/sections/sidebar.css'));
 wp_enqueue_style('social-icons', get_theme_file_uri('/css/sections/social-icons.css'));
@@ -296,6 +297,37 @@ function my_phone_number() {
 	// [phone_number]
 }
 add_shortcode('phone_number', 'my_phone_number');
+
+function custom_modify_block_output($block_content, $block) {
+    // Check if it's the core/paragraph, core/image, or core/columns block
+    if (in_array($block['blockName'], array('core/paragraph', 'core/image', 'core/columns', 'core/quote'))) {
+        // Modify the block content as needed
+        $block_content = '<section class=""><div class="container"><div class="row"><div class="col-12">' . $block_content . '</div></div></div></section>';
+    }
+    return $block_content;
+}
+
+add_filter('render_block', 'custom_modify_block_output', 10, 2);
+
+// function custom_modify_block_output($block_content, $block) {
+//     global $post;
+
+//     // Check if it's the core/paragraph, core/image, or core/columns block
+//     if (
+//         in_array($block['blockName'], array('core/paragraph', 'core/image', 'core/columns'))
+//         && !has_block('core/quote', $post)
+//     ) {
+//         // Modify the block content as needed
+//         $block_content = '<section class=""><div class="container"><div class="row"><div class="col-12">' . $block_content . '</div></div></div></section>';
+//     }
+//     return $block_content;
+// }
+
+// add_filter('render_block', 'custom_modify_block_output', 10, 2);
+
+
+
+
 
 // ENABLE WOOCOMMERCE
 // add_action('after_setup_theme',function() {

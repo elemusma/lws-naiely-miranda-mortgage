@@ -6,14 +6,14 @@ echo '<div class="row justify-content-center">';
 echo '<div class="col-md-5 text-center pb-5">';
 echo '<a href="' . home_url() . '">';
 
-$logo = get_field('logo','options'); 
-$logoFooter = get_field('logo_footer','options'); 
+// $logo = get_field('logo','options'); 
+// $logoFooter = get_field('logo_footer','options'); 
 
-if($logoFooter){
-echo wp_get_attachment_image($logoFooter['id'],'full',"",['class'=>'w-100 h-auto']); 
-} elseif($logo) {
-echo wp_get_attachment_image($logo['id'],'full',"",['class'=>'w-100 h-auto']);
-}
+// if($logoFooter){
+// echo wp_get_attachment_image($logoFooter['id'],'full',"",['class'=>'w-100 h-auto']); 
+// } elseif($logo) {
+// echo wp_get_attachment_image($logo['id'],'full',"",['class'=>'w-100 h-auto']);
+// }
 
 echo '</a>';
 echo '</div>';
@@ -34,11 +34,11 @@ wp_nav_menu(array(
 echo '</div>';
 echo '<div class="col-12 text-center text-white">';
 
-echo get_template_part('partials/si');
+// echo get_template_part('partials/si');
 
 echo '<div class="text-gray-1 pt-4">';
 
-the_field('website_message','options');
+// the_field('website_message','options');
 
 echo '</div>';
 echo '</div>';
@@ -55,8 +55,8 @@ echo '<div class="text-center pt-3 pb-3 pl-5 pr-5" style="background:#adadad;">'
 echo '</div>';
 echo '</footer>';
 
-if(get_field('footer', 'options')) { the_field('footer', 'options'); }
-if(get_field('footer_code')) { the_field('footer_code'); }
+// if(get_field('footer', 'options')) { the_field('footer', 'options'); }
+// if(get_field('footer_code')) { the_field('footer_code'); }
 
 wp_footer();
 

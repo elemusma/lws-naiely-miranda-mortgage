@@ -7,7 +7,7 @@
     color: white;
     border-radius: 8px;
     text-transform: uppercase;
-    border:2px solid var(--accent-primary);
+    border:1px solid var(--accent-primary);
 }
 
 .btn-main:hover {
@@ -17,7 +17,7 @@
 }
 
 .btn-main.outline {
-    border: 2px solid var(--accent-secondary);
+    border: 1px solid var(--accent-secondary);
     color:var(--accent-secondary);
     background:transparent;
 }
@@ -27,7 +27,7 @@
     color:white;
 }
 .btn-main.outline.white {
-    border: 2px solid white;
+    border-color: white;
     color:white;
     background:transparent;
 }

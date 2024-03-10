@@ -25,6 +25,10 @@ body.nav-open {
   opacity: 1;
 }
 
+section{
+  overflow:hidden;
+}
+
 .bg-accent {
   background: var(--accent-primary);
 }
@@ -116,7 +120,8 @@ hr.text-white {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
 }
 
 .divider {

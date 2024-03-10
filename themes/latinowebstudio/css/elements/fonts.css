@@ -58,20 +58,48 @@ a.text-black:hover {
 
 html,
 body {
-  font-family: "proxima_novaregular";
+  font-family: 'poppinsregular';
+}
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{
+  font-family: 'poppinsbold';
+  line-height: 1;
+  margin:0;
+}
+
+h1, .h1 {
+  font-size: 3.5rem;
+}
+h2, .h2 {
+  font-size: 3rem;
+}
+h3, .h3 {
+  font-size: 2.5rem;
+}
+h4, .h4 {
+  font-size: 2rem;
+}
+h5,.h5{
+  font-size:1.5rem;
+}
+.lead,h6,.h6{
+  font-size:1.25rem;
 }
 
 .light {
-  font-family: "proxima_nova_altlight";
+  font-family: 'poppinslight';
 }
 
-.thin {
-  font-family: "proxima_novathin";
+.extra-light {
+  font-family: 'poppinsextralight';
+}
+
+.semi-bold{
+  font-family: 'poppinssemibold';
 }
 
 .bold,
-strong {
-  font-family: "proxima_novabold";
+strong,b {
+  font-family: 'poppinsbold';
 }
 
 .arrows li {
@@ -79,7 +107,7 @@ strong {
   list-style: none;
   color: #a4a3a3;
   font-style: italic;
-  font-family: "proxima_novabold";
+  font-family: 'poppinsbold';
 }
 
 .arrows li:before {

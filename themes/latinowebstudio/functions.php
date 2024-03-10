@@ -14,7 +14,7 @@ function register_acf_blocks() {
     // register_block_type( __DIR__ . '/blocks/tabs' );
 }
 
-function latinowebstudio_stylesheets() {
+function naiely_miranda_stylesheets() {
 wp_enqueue_style('style', get_stylesheet_uri() );
 
 wp_enqueue_style('layout', get_theme_file_uri('/css/sections/layout.css'));
@@ -47,15 +47,16 @@ wp_enqueue_style('social-icons', get_theme_file_uri('/css/sections/social-icons.
 wp_enqueue_style('btn', get_theme_file_uri('/css/elements/btn.css'));
 // fonts
 wp_enqueue_style('fonts', get_theme_file_uri('/css/elements/fonts.css'));
-wp_enqueue_style('proxima-nova', get_theme_file_uri('/proxima-nova/proxima-nova.css'));
-wp_enqueue_style('blair-itc', get_theme_file_uri('/blair-itc/blair-itc.css'));
-wp_enqueue_style('aspira', get_theme_file_uri('/aspira-font/aspira-font.css'));
-wp_enqueue_style('coromant-garamond', '//use.typekit.net/fqe2slt.css');
+// wp_enqueue_style('proxima-nova', get_theme_file_uri('/proxima-nova/proxima-nova.css'));
+// wp_enqueue_style('blair-itc', get_theme_file_uri('/blair-itc/blair-itc.css'));
+// wp_enqueue_style('aspira', get_theme_file_uri('/aspira-font/aspira-font.css'));
+wp_enqueue_style('font-poppins', get_theme_file_uri('/font-poppins/font-poppins.css'));
+// wp_enqueue_style('coromant-garamond', '//use.typekit.net/fqe2slt.css');
 
 }
-add_action('wp_enqueue_scripts', 'latinowebstudio_stylesheets');
+add_action('wp_enqueue_scripts', 'naiely_miranda_stylesheets');
 // for footer
-function latinowebstudio_stylesheets_footer() {
+function naiely_miranda_stylesheets_footer() {
 	// wp_enqueue_style('style-footer', get_theme_file_uri('/css/style-footer.css'));
 	// owl carousel
 	wp_enqueue_style('owl.carousel.min', get_theme_file_uri('/owl-carousel/owl.carousel.min.css'));
@@ -91,7 +92,7 @@ function latinowebstudio_stylesheets_footer() {
 		}
 	}
 	
-add_action('get_footer', 'latinowebstudio_stylesheets_footer');
+add_action('get_footer', 'naiely_miranda_stylesheets_footer');
 
 // loads enqueued javascript files deferred
 function mind_defer_scripts( $tag, $handle, $src ) {
@@ -115,7 +116,7 @@ function mind_defer_scripts( $tag, $handle, $src ) {
   } 
   add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
 
-function latinowebstudio_menus() {
+function naiely_miranda_menus() {
  register_nav_menus( array(
    'primary' => __( 'Primary' )));
 register_nav_menus( array(
@@ -125,7 +126,7 @@ register_nav_menus( array(
  add_theme_support('post-thumbnails');
 }
 
-add_action('after_setup_theme', 'latinowebstudio_menus');
+add_action('after_setup_theme', 'naiely_miranda_menus');
 
 if( function_exists('acf_add_options_page') ) {
 
@@ -300,7 +301,7 @@ add_shortcode('phone_number', 'my_phone_number');
 
 function custom_modify_block_output($block_content, $block) {
     // Check if it's the core/paragraph, core/image, or core/columns block
-    if (in_array($block['blockName'], array('core/paragraph', 'core/image', 'core/columns', 'core/quote'))) {
+    if (in_array($block['blockName'], array('core/image', 'core/columns', 'core/quote'))) {
         // Modify the block content as needed
         $block_content = '<section class=""><div class="container"><div class="row"><div class="col-12">' . $block_content . '</div></div></div></section>';
     }

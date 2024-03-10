@@ -24,6 +24,20 @@
 			"type": "string",
 			"default": ""
 		},
+		"section_image": {
+		  "type": "string",
+		  "default": null
+		},
+	"section_image_class": {
+	  "type": "string"
+	},
+	"section_image_style": {
+	  "type": "string"
+	},
+		"section_block": {
+		  "type": "string",
+		  "default":""
+		},
 		"container_style": {
 			"type": "string",
 			"default": ""

@@ -11,8 +11,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { Button, PanelBody, __experimentalInputControl as InputControl } from '@wordpress/components';
+import { InspectorControls, useBlockProps, InnerBlocks, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { Button, PanelBody, __experimentalInputControl as InputControl,TextControl, } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 
 /**
@@ -32,13 +32,13 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
-	const { section_style, section_class, section_id, container_style, container_class, container_id, row_style, row_class, row_id, col_style, col_class, col_id } = attributes;
+	const { section_style, section_class, section_id, section_image, section_image_class, section_image_style, section_block, container_style, container_class, container_id, row_style, row_class, row_id, col_style, col_class, col_id } = attributes;
 
 	const [value, setValue] = useState('');
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Section Attributes')} initialOpen={false}>
+				<PanelBody title={__('Section')} initialOpen={false}>
 					<InputControl
 						label="Section Style"
 						value={section_style}
@@ -52,10 +52,68 @@ export default function Edit({ attributes, setAttributes }) {
 					<InputControl
 						label="Section ID"
 						value={section_id}
-						onChange={(nextValue) => setAttributes({ section_class: nextValue })}
+						onChange={(nextValue) => setAttributes({ section_id: nextValue })}
+					/>
+					
+					
+				</PanelBody>
+				<PanelBody title={__('Background Image')} initialOpen={false}>
+				<MediaUploadCheck>
+  <MediaUpload
+    onSelect={(media) => setAttributes({ section_image: media.url })}
+    type="image"
+    allowedTypes={['image']}
+    value={section_image}
+    render={({ open }) => (
+      <div>
+        {section_image && (
+          <Button
+            isLink
+            isDestructive
+            onClick={() => setAttributes({ section_image: '' })}
+          >
+            {__('Remove Section Image')}
+          </Button>
+        )}
+        <Button
+          onClick={open}
+          icon="upload"
+          className="editor-media-placeholder__button is-button is-default is-large"
+        >
+          {__('Select Section Image')}
+        </Button>
+      </div>
+    )}
+  />
+</MediaUploadCheck>
+
+					<InputControl
+						label="Background Image Class"
+						value={section_image_class}
+						onChange={(nextValue) => setAttributes({ section_image_class: nextValue })}
+					/>
+					<InputControl
+						label="Background Image Style"
+						value={section_image_style}
+						onChange={(nextValue) => setAttributes({ section_image_style: nextValue })}
 					/>
 				</PanelBody>
-				<PanelBody title={__('Container Attributes')} initialOpen={false}>
+				<PanelBody title={__('Code Block')} initialOpen={false}>
+				{/* <InputControl
+						label="Code Block"
+						value={section_block}
+						onChange={(nextValue) => setAttributes({ section_block: nextValue })}
+					/> */}
+					<label style={{lineHeight:'2'}}>Code Block</label>
+					<textarea
+						id="sectionStyleTextarea"
+						value={attributes.section_block}
+						onChange={(event) => setAttributes({ section_block: event.target.value })}
+						placeholder="Enter section block here"
+						style={{width:'100%'}}
+					/>
+				</PanelBody>
+				<PanelBody title={__('Container')} initialOpen={false}>
 					<InputControl
 						label="Container Section Style"
 						value={container_style}
@@ -72,7 +130,7 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(nextValue) => setAttributes({ container_id: nextValue })}
 					/>
 				</PanelBody>
-				<PanelBody title={__('Row Attributes')} initialOpen={false}>
+				<PanelBody title={__('Row')} initialOpen={false}>
 					<InputControl
 						label="Row Style"
 						value={row_style}
@@ -89,7 +147,7 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(nextValue) => setAttributes({ row_id: nextValue })}
 					/>
 				</PanelBody>
-				<PanelBody title={__('Column Attributes')} initialOpen={false}>
+				<PanelBody title={__('Column')} initialOpen={false}>
 					<InputControl
 						label="Column Style"
 						value={col_style}
@@ -108,9 +166,9 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<section {...useBlockProps()}>
-				<p>
-					{__('Content Block – hello from the editor! this is the editor', 'content-block')}
-				</p>
+				<img src={section_image} alt="" />
+				{console.log(section_image)}
+			<InnerBlocks />
 			</section>
 		</>
 	);

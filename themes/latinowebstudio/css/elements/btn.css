@@ -5,9 +5,11 @@
     display: inline-block;
     text-decoration: none;
     color: white;
-    border-radius: 8px;
+    border-radius: 25px;
     text-transform: uppercase;
     border:1px solid var(--accent-primary);
+    font-size:.8rem;
+    font-family: 'poppinssemibold';
 }
 
 .btn-main:hover {
@@ -24,6 +26,16 @@
 
 .btn-main.outline:hover {
     background: var(--accent-secondary);
+    color:white;
+}
+.btn-main.outline.accent {
+    border-color: var(--accent-primary);
+    color:var(--accent-primary);
+    background:transparent;
+}
+
+.btn-main.outline.accent:hover {
+    background: var(--accent-primary);
     color:white;
 }
 .btn-main.outline.white {

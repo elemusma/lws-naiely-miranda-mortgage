@@ -1,6 +1,7 @@
 :root {
   --accent-primary: #e65525;
   --accent-secondary: #182236;
+  --light: #f9f9f9;
 }
 
 html {
@@ -47,6 +48,10 @@ a.bg-accent-secondary:hover {
 
 .bg-white {
   background: white;
+}
+
+.bg-light {
+  background: var(--light);
 }
 
 .bg-black {

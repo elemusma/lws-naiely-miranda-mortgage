@@ -1,6 +1,6 @@
 <?php get_header();
 
-global $post;
+// global $post;
 if ( ! post_password_required( $post ) ) {
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();

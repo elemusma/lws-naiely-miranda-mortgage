@@ -1,4 +1,5 @@
 <?php
+
 echo '<footer>';
 echo '<section class="pt-5">';
 echo '<div class="container">';

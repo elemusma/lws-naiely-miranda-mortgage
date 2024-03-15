@@ -1,5 +1,6 @@
 <?php get_header();
 
+
 // global $post;
 if ( ! post_password_required( $post ) ) {
 

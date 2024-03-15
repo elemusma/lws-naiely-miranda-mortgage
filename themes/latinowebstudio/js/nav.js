@@ -12,15 +12,15 @@ let logoSecondary = document.querySelector('#logo-secondary')
 window.addEventListener("scroll", parallaxEffect);
 
 function parallaxEffect() {
-    blankSpace.style.height = header.offsetHeight + "px";
+    blankSpace.style.height = (((header.offsetHeight) - 1) + "px");
     header.classList.add('position-fixed');
     header.classList.remove('position-relative');
 
-    if (scrollY < 299) {
-        logoMain.style.width = "275px"
-    } else if (scrollY > 300) {
-        logoMain.style.width = "205px"
-    }
+    // if (scrollY < 299) {
+    //     logoMain.style.width = "275px"
+    // } else if (scrollY > 300) {
+    //     logoMain.style.width = "205px"
+    // }
 }
 
 // closes menu on menu item clicked, for anchor links

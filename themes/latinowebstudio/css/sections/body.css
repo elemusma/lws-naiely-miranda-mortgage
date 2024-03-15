@@ -2,6 +2,7 @@
   --accent-primary: #162764;
   --accent-secondary: #FDB717;
   --light: #f9f9f9;
+  --light-secondary: #e8edec;
 }
 
 html {
@@ -52,6 +53,9 @@ a.bg-accent-secondary:hover {
 
 .bg-light {
   background: var(--light);
+}
+.bg-light-secondary {
+  background: var(--light-secondary);
 }
 
 .bg-black {

@@ -299,6 +299,57 @@ return get_field('phone','options');
 }
 add_shortcode('phone_number', 'my_phone_number');
 
+function type_writer_shortcode( $atts ) {
+	wp_enqueue_script('typewriter-js',get_theme_file_uri('/js/typewriter.js'));
+	wp_enqueue_style('typewriter-css',get_theme_file_uri('/css/sections/typewriter.css'));
+    // Extract shortcode attributes
+    $atts = shortcode_atts( array(
+        'text' => '',
+        'wait' => '1000',
+        'words' => '',
+		'style'=>'',
+		'class'=>''
+    ), $atts );
+
+    // Sanitize attribute values
+    $text = sanitize_text_field( $atts['text'] );
+    $wait = intval( $atts['wait'] );
+    $word_sets = array_map( 'trim', explode( ',', $atts['words'] ) );
+
+    // Output HTML
+    ob_start();
+	echo '<div class="' . esc_attr($atts['class']) . '" style="' . esc_attr($atts['style']) . '">';
+    ?>
+	<span><?php echo esc_html( $text ); ?></span><span class="txt-type" style="" data-wait="<?php echo esc_attr( $wait ); ?>" data-words='<?php echo esc_attr( json_encode( $word_sets ) ); ?>'></span>
+	</div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'type_writer', 'type_writer_shortcode' );
+
+
+
+function txt_type_shortcode( $atts ) {
+    // Extract shortcode attributes
+    $atts = shortcode_atts( array(
+        'wait' => '1000',
+        'words' => '["Developer","Designer","Creator"]'
+    ), $atts );
+
+    // Sanitize attribute values
+    $wait = intval( $atts['wait'] );
+    $words = json_decode( $atts['words'] );
+
+    // Output HTML
+    ob_start();
+    ?>
+    <span class="txt-type" data-wait="<?php echo esc_attr( $wait ); ?>" data-words='<?php echo esc_attr( json_encode( $words ) ); ?>'></span>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'txt_type', 'txt_type_shortcode' );
+
+
 function custom_modify_block_output($block_content, $block) {
 // Check if it's the core/paragraph, core/image, or core/columns block
 if (in_array($block['blockName'], array('core/image', 'core/columns', 'core/quote'))) {
@@ -337,14 +388,14 @@ $prefix = 'my_framework';
 //
 // Create options
 CSF::createOptions( $prefix, array(
-	'menu_title' => 'My Framework',
+	'menu_title' => 'Global Settings',
 	'menu_slug'  => 'my-framework',
 ) );
 
 //
 // Create a section
 CSF::createSection( $prefix, array(
-	'title'  => 'Tab Title 1',
+	'title'  => 'Logo',
 	'fields' => array(
 
 	//
@@ -356,11 +407,17 @@ CSF::createSection( $prefix, array(
 	),
 	// Media
 	array(
-		'id'    => 'opt-media-1',
+		'id'    => 'img-logo',
 		'type'  => 'media',
-		'title' => 'Media',
-		'subtitle' => 'hello'
+		'title' => 'Main Logo',
 		),
+	// Code Editor
+	array(
+		'id'    => 'logo-svg',
+		'type'  => 'code_editor',
+		'title' => 'SVG for Logo',
+		'sanitize' => false,
+	  ),
 		
 		
 
@@ -370,25 +427,51 @@ CSF::createSection( $prefix, array(
 //
 // Create a section
 CSF::createSection( $prefix, array(
-	'title'  => 'Tab Title 2',
+	'title'  => 'Header, Body & Footer Code',
 	'fields' => array(
 
 	// A textarea field
-	array(
-		'id'    => 'opt-textarea',
-		'type'  => 'textarea',
-		'title' => 'Simple Textarea',
-	),
+	// array(
+	// 	'id'    => 'opt-textarea',
+	// 	'type'  => 'textarea',
+	// 	'title' => 'Simple Textarea',
+	// ),
+	// // Textarea
+	// array(
+	// 	'id'      => 'logotestingnow',
+	// 	'type'    => 'textarea',
+	// 	'title'   => 'SVG for Logo'
+	//   ),
+	//   Code Editor
+	//   array(
+	// 	'id'    => 'code-header',
+	// 	'type'  => 'code_editor',
+	// 	'title' => 'Code Header',
+	//   ),
+	  array(
+		'id'       => 'code-header-one',
+		'type'     => 'code_editor',
+		'title'    => 'HTML Editor',
+		'sanitize' => false,
+		'settings' => array(
+		  'theme'  => 'mdn-like',
+		  'mode'   => 'htmlmixed',
+		),
+		'default'  => '<h1>Hello world</h1>',
+	  ),
+	  array(
+		'id'       => 'opt-code-editor-5',
+		'type'     => 'code_editor',
+		'title'    => 'Code Editor without sanitize',
+		'sanitize' => false,
+	  ),
+	  
 
 	)
 ) );
 
 }
 
-// global $options;
-// $options = get_option( 'my_framework' ); // unique id of the framework
-// global $logoImg;
-// $logoImg = $options['opt-media-1'];
 
 function global_function() {
     global $options;
@@ -399,24 +482,54 @@ function global_function() {
 function logoImg() {
     global $options;
     global_function(); // call the global function to set $options
-    return $options['opt-media-1'];
+    return $options['img-logo'];
+}
+function logoSVG() {
+    global $options;
+    global_function(); // call the global function to set $options
+    return $options['logo-svg'];
+}
+function codeHeader() {
+    global $options;
+    global_function(); // call the global function to set $options
+    return $options['code-header-one'];
+}
+function codeHeaderFive() {
+    global $options;
+    global_function(); // call the global function to set $options
+    return $options['opt-code-editor-5'];
 }
 
+// Allow SVG
+add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
 
-// global $logoImg;
-// $logoImg = $options['opt-media-1'];
-
-// $options = get_option( 'my_framework' ); // unique id of the framework
-// echo $options['opt-text'];
-// echo '<br>';
-// // $img = $options['opt-media-1']['id'];
-// echo '<br>';
-// print_r($options['opt-media-1']);
-// echo '<br>';
-// echo '<pre>';
-// var_dump($options['opt-media-1']);
-// echo '</pre>';
-
-// echo wp_get_attachment_image($logoImg,'full','',[
-//     'class'=>'w-100 h-auto'
-// ]);
+	global $wp_version;
+	if ( $wp_version !== '4.7.1' ) {
+	   return $data;
+	}
+  
+	$filetype = wp_check_filetype( $filename, $mimes );
+  
+	return [
+		'ext'             => $filetype['ext'],
+		'type'            => $filetype['type'],
+		'proper_filename' => $data['proper_filename']
+	];
+  
+  }, 10, 4 );
+  
+  function cc_mime_types( $mimes ){
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+  }
+  add_filter( 'upload_mimes', 'cc_mime_types' );
+  
+  function fix_svg() {
+	echo '<style type="text/css">
+		  .attachment-266x266, .thumbnail img {
+			   width: 100% !important;
+			   height: auto !important;
+		  }
+		  </style>';
+  }
+  add_action( 'admin_head', 'fix_svg' );

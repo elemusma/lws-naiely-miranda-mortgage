@@ -2,6 +2,10 @@ body {
     margin: 0px;
 }
 
+.mt-0 {
+    margin-top:0;
+}
+
 /* Hidden on all devices */
 .d-none {
     display: none !important;

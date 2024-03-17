@@ -1,22 +1,75 @@
 <?php
 
 echo '<footer>';
-echo '<section class="pt-5">';
+echo '<section class="bg-accent" style="padding-top:50px;">';
 echo '<div class="container">';
 echo '<div class="row justify-content-center">';
-echo '<div class="col-md-5 text-center pb-5">';
+
+echo '<div class="col-lg-6 text-white" style="padding-bottom:50px;">';
 echo '<a href="' . home_url() . '">';
-
-// $logo = get_field('logo','options'); 
-// $logoFooter = get_field('logo_footer','options'); 
-
-// if($logoFooter){
-// echo wp_get_attachment_image($logoFooter['id'],'full',"",['class'=>'w-100 h-auto']); 
-// } elseif($logo) {
-// echo wp_get_attachment_image($logo['id'],'full',"",['class'=>'w-100 h-auto']);
-// }
-
+echo logoSVG();
 echo '</a>';
+echo '</div>';
+echo '</div>';
+
+echo '<div class="row">';
+
+echo '<div class="col-lg-6 text-white">';
+echo '<strong>Naiely Miranda Mortgage</strong>';
+
+
+// echo '<div style="max-width:90%;">';
+// echo '<a href="' . home_url() . '">';
+// echo logoSVG();
+// echo '</a>';
+// echo '</div>';
+
+echo '<p class="">' . companyAbout() . '</p>';
+
+echo '</div>';
+echo '<div class="col-lg-3 text-white">';
+echo '<strong>Navigation</strong>';
+echo '<p>';
+wp_nav_menu(array(
+    'menu' => 'footer',
+    'menu_class'=>'menu list-unstyled text-white text-uppercase mt-0'
+    ));
+echo '</p>';
+echo '</div>';
+echo '<div class="col-lg-3 text-white">';
+echo '<strong>Blog</strong>';
+echo '<p>';
+$recentBlog = new WP_Query(array(
+    'posts_per_page' => 3,
+    'post_type' => 'post',
+    'post__not_in' => [get_the_ID()],
+    ));
+    echo '<ul class="list-unstyled">';
+    $recentCounter = 0;
+    while($recentBlog->have_posts()){
+    $recentBlog->the_post();
+    $recentCounter++;
+
+    if($recentCounter =1 ) {
+        echo '<li style="padding-bottom:9px;"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></li>';
+    } else {
+        echo '<li style="padding:9px 0px;"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></li>';
+    }
+
+
+    } wp_reset_postdata();
+    echo '</ul>';
+    echo '</div>';
+
+//     echo '<div class="col-lg-3 text-white">';
+// echo '<strong>Home Buying Guide</strong>';
+// echo '<p>';
+// echo do_shortcode('[gravityform id="1" title="false" description="false" ajax="true"]');
+// echo '</p>';
+// echo '</div>';
+
+    echo '</div>';
+echo '</p>';
 echo '</div>';
 echo '</div>';
 echo '</div>';
@@ -27,10 +80,7 @@ echo '<div class="container">';
 echo '<div class="row justify-content-center">';
 echo '<div class="col-12">';
 
-wp_nav_menu(array(
-'menu' => 'footer',
-'menu_class'=>'menu d-flex flex-wrap list-unstyled justify-content-center text-white text-uppercase'
-));
+
 
 echo '</div>';
 echo '<div class="col-12 text-center text-white">';
@@ -46,12 +96,9 @@ echo '</div>';
 echo '</div>';
 echo '</div>';
 echo '</section>';
-echo '<div class="text-center pt-3 pb-3 pl-5 pr-5" style="background:#adadad;">';
+echo '<div class="text-center bg-light" style="padding:15px 0px;">';
     echo '<div class="d-flex justify-content-center align-items-center">';
-        echo '<a href="https://insideoutcreative.io/" target="_blank" rel="noopener noreferrer" style="" class="">';
-        echo '<img src="https://insideoutcreative.io/wp-content/uploads/2022/04/created-by-inside-out-creative.png" style="width:150px;" class="h-auto ml-2" alt="">';
-        // echo '<img src="https://insideoutcreative.io/wp-content/uploads/2022/06/created-by-inside-out-creative-black.png" style="width:150px;" class="h-auto ml-2" alt="">';
-        echo '</a>';
+        echo '<small class=""><a href="https://latinowebstudio.com/" target="_blank" rel="noopener noreferrer" title="Web Design, Web Development & SEO done by Latino Web Studio in Denver, CO" style="" class="">Web Design, Web Development & SEO in Denver, CO</a> done by Latino Web Studio</small>';
     echo '</div>';
 echo '</div>';
 echo '</footer>';

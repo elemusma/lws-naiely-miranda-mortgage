@@ -46,7 +46,7 @@ img.img-si {
 .img-hover:after {
     content: "+";
     position: absolute;
-    width: 40px;
+    width: 50px;
     height: 40px;
     border-radius: 50%;
     background: #b5a46d;
@@ -62,6 +62,7 @@ img.img-si {
     opacity: 0;
     transition: all .25s ease-in-out;
     pointer-events: none;
+    padding-top:10px;
 }
 
 /* image hover with favicon instead of plus sign */

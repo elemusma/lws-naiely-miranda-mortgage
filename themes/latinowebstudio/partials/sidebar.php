@@ -1,9 +1,9 @@
 <?php 
 
-echo '<div class="col-md-3 sidebar order-2 order-md-1">';
-echo '<div class="card p-3 mb-2">';
-get_search_form();
-echo '</div>';
+echo '<div class="col-md-3 sidebar order-2">';
+// echo '<div class="card p-3 mb-2">';
+// get_search_form();
+// echo '</div>';
 
 echo '<div class="card p-3 mt-2 mb-2">';
 echo '<h3 class="teko">Recent Posts</h3>';

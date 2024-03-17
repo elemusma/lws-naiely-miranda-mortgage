@@ -427,27 +427,25 @@ CSF::createSection( $prefix, array(
 //
 // Create a section
 CSF::createSection( $prefix, array(
+	'title'  => 'About',
+	'fields' => array(
+
+	  
+	  // A textarea field
+      array(
+        'id'    => 'company-about',
+        'type'  => 'textarea',
+        'title' => 'Description about the company',
+      ),
+	  
+
+	)
+) );
+// Create a section
+CSF::createSection( $prefix, array(
 	'title'  => 'Header, Body & Footer Code',
 	'fields' => array(
 
-	// A textarea field
-	// array(
-	// 	'id'    => 'opt-textarea',
-	// 	'type'  => 'textarea',
-	// 	'title' => 'Simple Textarea',
-	// ),
-	// // Textarea
-	// array(
-	// 	'id'      => 'logotestingnow',
-	// 	'type'    => 'textarea',
-	// 	'title'   => 'SVG for Logo'
-	//   ),
-	//   Code Editor
-	//   array(
-	// 	'id'    => 'code-header',
-	// 	'type'  => 'code_editor',
-	// 	'title' => 'Code Header',
-	//   ),
 	  array(
 		'id'       => 'code-header-one',
 		'type'     => 'code_editor',
@@ -498,6 +496,11 @@ function codeHeaderFive() {
     global $options;
     global_function(); // call the global function to set $options
     return $options['opt-code-editor-5'];
+}
+function companyAbout() {
+    global $options;
+    global_function(); // call the global function to set $options
+    return $options['company-about'];
 }
 
 // Allow SVG

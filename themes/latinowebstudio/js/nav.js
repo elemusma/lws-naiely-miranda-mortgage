@@ -7,6 +7,7 @@ let header = document.querySelector('header');
 let blankSpace = document.querySelector('.blank-space');
 
 let logoMain = document.querySelector('#logo-main')
+let menuPrimary = document.querySelector('#menu-primary')
 let logoSecondary = document.querySelector('#logo-secondary')
 
 window.addEventListener("scroll", parallaxEffect);
@@ -16,11 +17,15 @@ function parallaxEffect() {
     header.classList.add('position-fixed');
     header.classList.remove('position-relative');
 
-    // if (scrollY < 299) {
-    //     logoMain.style.width = "275px"
-    // } else if (scrollY > 300) {
-    //     logoMain.style.width = "205px"
-    // }
+    if (scrollY < 299) {
+        logoMain.style.width = "100%"
+        menuPrimary.style.paddingTop = "1em"
+        menuPrimary.style.paddingBottom = "1em"
+    } else if (scrollY > 300) {
+        logoMain.style.width = "75%"
+        menuPrimary.style.paddingTop = "0px"
+        menuPrimary.style.paddingBottom = "0px"
+    }
 }
 
 // closes menu on menu item clicked, for anchor links

@@ -1,19 +1,5 @@
 <?php
 
-// add_action( 'init', 'register_acf_blocks' );
-
-// function register_acf_blocks() {
-// register_block_type( __DIR__ . '/blocks/content' );
-// register_block_type( __DIR__ . '/blocks/applications' );
-// register_block_type( __DIR__ . '/blocks/about' );
-// // register_block_type( __DIR__ . '/blocks/industries' );
-// // register_block_type( __DIR__ . '/blocks/popup' );
-// // register_block_type( __DIR__ . '/blocks/gallery' );
-// // register_block_type( __DIR__ . '/blocks/testimonials' );
-// // register_block_type( __DIR__ . '/blocks/gallery-carousel' );
-// // register_block_type( __DIR__ . '/blocks/tabs' );
-// }
-
 function naiely_miranda_stylesheets() {
 wp_enqueue_style('style', get_stylesheet_uri() );
 
@@ -59,26 +45,26 @@ add_action('wp_enqueue_scripts', 'naiely_miranda_stylesheets');
 function naiely_miranda_stylesheets_footer() {
 // wp_enqueue_style('style-footer', get_theme_file_uri('/css/style-footer.css'));
 // owl carousel
-wp_enqueue_style('owl.carousel.min', get_theme_file_uri('/owl-carousel/owl.carousel.min.css'));
-wp_enqueue_style('owl.theme.default', get_theme_file_uri('/owl-carousel/owl.theme.default.min.css'));
-wp_enqueue_style('lightbox-css', get_theme_file_uri('/lightbox/lightbox.min.css'));
+// wp_enqueue_style('owl.carousel.min', get_theme_file_uri('/owl-carousel/owl.carousel.min.css'));
+// wp_enqueue_style('owl.theme.default', get_theme_file_uri('/owl-carousel/owl.theme.default.min.css'));
+// wp_enqueue_style('lightbox-css', get_theme_file_uri('/lightbox/lightbox.min.css'));
 // wp_enqueue_script('font-awesome', '//use.fontawesome.com/fff80caa08.js');
 
 // owl carousel
-wp_enqueue_script('jquery-min', get_theme_file_uri('/owl-carousel/jquery.min.js'));
-wp_enqueue_script('owl-carousel', get_theme_file_uri('/owl-carousel/owl.carousel.min.js'));
-wp_enqueue_script('owl-carousel-custom', get_theme_file_uri('/owl-carousel/owl-carousels.js'));
-wp_enqueue_script('lightbox-min-js', get_theme_file_uri('/lightbox/lightbox.min.js'));
-wp_enqueue_script('lightbox-js', get_theme_file_uri('/lightbox/lightbox.js'));
+// wp_enqueue_script('jquery-min', get_theme_file_uri('/owl-carousel/jquery.min.js'));
+// wp_enqueue_script('owl-carousel', get_theme_file_uri('/owl-carousel/owl.carousel.min.js'));
+// wp_enqueue_script('owl-carousel-custom', get_theme_file_uri('/owl-carousel/owl-carousels.js'));
+// wp_enqueue_script('lightbox-min-js', get_theme_file_uri('/lightbox/lightbox.min.js'));
+// wp_enqueue_script('lightbox-js', get_theme_file_uri('/lightbox/lightbox.js'));
 // aos
 wp_enqueue_script('aos-js', get_theme_file_uri('/aos/aos.js'));
 wp_enqueue_script('aos-custom-js', get_theme_file_uri('/aos/aos-custom.js'));
 wp_enqueue_style('aos-css', get_theme_file_uri('/aos/aos.css'));
 
 // jquery fittext
-wp_enqueue_script('jquery-min-js', get_theme_file_uri('/jquery-fittext/jquery.min.js'));
-wp_enqueue_script('jquery-fittext', get_theme_file_uri('/jquery-fittext/jquery.fittext.js'));
-wp_enqueue_script('jquery-fittext-custom', get_theme_file_uri('/jquery-fittext/fittext.js'));
+// wp_enqueue_script('jquery-min-js', get_theme_file_uri('/jquery-fittext/jquery.min.js'));
+// wp_enqueue_script('jquery-fittext', get_theme_file_uri('/jquery-fittext/jquery.fittext.js'));
+// wp_enqueue_script('jquery-fittext-custom', get_theme_file_uri('/jquery-fittext/fittext.js'));
 // jquery modal
 // wp_enqueue_script('jquery-modal-js', get_theme_file_uri('/jquery-modal/jquery.modal.min.js'));
 // wp_enqueue_style('jquery-modal-css', get_theme_file_uri('/jquery-modal/jquery.modal.min.css'));
@@ -385,7 +371,26 @@ if( class_exists( 'CSF' ) ) {
 // Set a unique slug-like ID
 $prefix = 'my_framework';
 
-//
+$post_prefix = 'my_post_framework';
+// Create a metabox
+CSF::createMetabox( $post_prefix, array(
+    'title'     => 'My Post Options',
+    'post_type' => 'post',
+    'fields'    => array(
+        array(
+            'id'    => 'my_text_field',
+            'type'  => 'text',
+            'title' => 'My Text Field',
+        ),
+    ),
+    'callback'  => 'my_metabox_callback_function',
+) );
+
+// Define the callback function
+function my_metabox_callback_function() {
+    echo 'This is where you can add additional HTML content for the metabox if needed.';
+}
+
 // Create options
 CSF::createOptions( $prefix, array(
 	'menu_title' => 'Global Settings',
@@ -400,11 +405,11 @@ CSF::createSection( $prefix, array(
 
 	//
 	// A text field
-	array(
-		'id'    => 'opt-text',
-		'type'  => 'text',
-		'title' => 'Simple Text',
-	),
+	// array(
+	// 	'id'    => 'opt-text',
+	// 	'type'  => 'text',
+	// 	'title' => 'Simple Text',
+	// ),
 	// Media
 	array(
 		'id'    => 'img-logo',
@@ -416,6 +421,12 @@ CSF::createSection( $prefix, array(
 		'id'    => 'logo-svg',
 		'type'  => 'code_editor',
 		'title' => 'SVG for Logo',
+		'sanitize' => false,
+	  ),
+	array(
+		'id'    => 'logo-svg-secondary',
+		'type'  => 'code_editor',
+		'title' => 'SVG for Logo Secondary',
 		'sanitize' => false,
 	  ),
 		
@@ -446,21 +457,33 @@ CSF::createSection( $prefix, array(
 	'title'  => 'Header, Body & Footer Code',
 	'fields' => array(
 
+	//   array(
+	// 	'id'       => 'code-header-one',
+	// 	'type'     => 'code_editor',
+	// 	'title'    => 'HTML Editor',
+	// 	'sanitize' => false,
+	// 	'settings' => array(
+	// 	  'theme'  => 'mdn-like',
+	// 	  'mode'   => 'htmlmixed',
+	// 	),
+	// 	'default'  => '<h1>Hello world</h1>',
+	//   ),
 	  array(
-		'id'       => 'code-header-one',
+		'id'       => 'code-header',
 		'type'     => 'code_editor',
-		'title'    => 'HTML Editor',
+		'title'    => 'Code: Header',
 		'sanitize' => false,
-		'settings' => array(
-		  'theme'  => 'mdn-like',
-		  'mode'   => 'htmlmixed',
-		),
-		'default'  => '<h1>Hello world</h1>',
 	  ),
 	  array(
-		'id'       => 'opt-code-editor-5',
+		'id'       => 'code-body',
 		'type'     => 'code_editor',
-		'title'    => 'Code Editor without sanitize',
+		'title'    => 'Code: Body',
+		'sanitize' => false,
+	  ),
+	  array(
+		'id'       => 'code-footer',
+		'type'     => 'code_editor',
+		'title'    => 'Code: Footer',
 		'sanitize' => false,
 	  ),
 	  
@@ -487,15 +510,27 @@ function logoSVG() {
     global_function(); // call the global function to set $options
     return $options['logo-svg'];
 }
+function logoSVGSecondary() {
+    global $options;
+    global_function(); // call the global function to set $options
+    return $options['logo-svg-secondary'];
+}
+add_shortcode('logo_svg_secondary','logoSVGSecondary');
+
 function codeHeader() {
     global $options;
     global_function(); // call the global function to set $options
-    return $options['code-header-one'];
+    return $options['code-header'];
 }
-function codeHeaderFive() {
+function codeBody() {
     global $options;
     global_function(); // call the global function to set $options
-    return $options['opt-code-editor-5'];
+    return $options['code-body'];
+}
+function codeFooter() {
+    global $options;
+    global_function(); // call the global function to set $options
+    return $options['code-footer'];
 }
 function companyAbout() {
     global $options;

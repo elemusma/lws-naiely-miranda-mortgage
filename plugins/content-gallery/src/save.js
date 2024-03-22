@@ -70,7 +70,7 @@ export default function save( { attributes } ) {
 							{ attributes.gallery_images &&
 								attributes.gallery_images.map( ( image ) => (
 							<div
-							className={ `gallery col-lg-${ attributes.gallery_columns }` }>
+							className={ `gallery ${ attributes.gallery_columns }` }>
 									<img
 										key={ image.id }
 										src={ image.url }

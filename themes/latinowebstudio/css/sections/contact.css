@@ -5,7 +5,7 @@ input.gform_button.button {
   padding: 10px 35px;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
-  max-width: 250px;
+  /* max-width: 250px; */
   width: 100%;
   /* margin: auto; */
   cursor: pointer;

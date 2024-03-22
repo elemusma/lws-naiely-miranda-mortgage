@@ -15,6 +15,8 @@ import { InspectorControls, useBlockProps, InnerBlocks, MediaUpload, MediaUpload
 import { Button, PanelBody, __experimentalInputControl as InputControl,TextControl, } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 
+// import MyTextComponent from './MyTextComponent';
+
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -32,9 +34,10 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
-	const { section_style, section_class, section_id, section_image, section_image_class, section_image_style, section_block, container_style, container_class, container_id, row_style, row_class, row_id, col_style, col_class, col_id } = attributes;
+	const { section_style, section_class, section_id, section_image, section_image_class, section_image_style, section_block, container_style, container_class, container_id, row_style, row_class, row_id, col_style, col_class, col_id, col_code, col_code_style,col_code_class,col_code_id } = attributes;
 
 	const [value, setValue] = useState('');
+	
 	return (
 		<>
 			<InspectorControls>
@@ -99,11 +102,11 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 				<PanelBody title={__('Code Block')} initialOpen={false}>
-				{/* <InputControl
+				<InputControl
 						label="Code Block"
 						value={section_block}
 						onChange={(nextValue) => setAttributes({ section_block: nextValue })}
-					/> */}
+					/>
 					<label style={{lineHeight:'2'}}>Code Block</label>
 					<textarea
 						id="sectionStyleTextarea"
@@ -164,24 +167,39 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(nextValue) => setAttributes({ col_id: nextValue })}
 					/>
 				</PanelBody>
+				<PanelBody title={__('Column Code')} initialOpen={false}>
+					<InputControl
+						label="Column Code Style"
+						value={col_code_style}
+						onChange={(nextValue) => setAttributes({ col_code_style: nextValue })}
+					/>
+					<InputControl
+						label="Column Code Class"
+						value={col_code_class}
+						onChange={(nextValue) => setAttributes({ col_code_class: nextValue })}
+					/>
+					<InputControl
+						label="Column Code ID"
+						value={col_code_id}
+						onChange={(nextValue) => setAttributes({ col_code_id: nextValue })}
+					/>
+				</PanelBody>
 			</InspectorControls>
 			<section {...useBlockProps()}>
 				<img src={section_image} alt="" />
 				{console.log(section_image)}
 				<div style={{ display: 'flex' }}>
                     <div style={{ flex: '1', marginRight: '20px', width: '50%' }}>
-                        <InnerBlocks
-                            allowedBlocks={['content-block']} // Set the allowed blocks for left column
-                            templateLock="all"
-                            template={[['content-block']]} // Define template for left column
-                        />
+						<InnerBlocks />
                     </div>
                     <div style={{ flex: '1', width: '50%' }}>
-                        <InnerBlocks
-                            allowedBlocks={['two-columns']} // Set the allowed blocks for right column
-                            templateLock="all"
-                            template={[['two-columns']]} // Define template for right column
-                        />
+					<textarea
+						id="colCodeTextarea"
+						value={attributes.col_code}
+						onChange={(event) => setAttributes({ col_code: event.target.value })}
+						placeholder="Enter your code here"
+						style={{width:'100%', height:'100px'}}
+					/>
                     </div>
                 </div>
 			</section>

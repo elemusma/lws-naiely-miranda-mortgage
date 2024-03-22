@@ -357,11 +357,11 @@ const Gallery = ( { gallery_images, gallery_columns } ) => {
 	// Render your gallery based on the images and columns
 	// You can use the images array to loop through and display the selected images
 	return (
-		<div className={ `gallery columns-${ gallery_columns }` }>
+		<div className={ `gallery row columns-${ gallery_columns } row` }>
 			{ /* Your gallery rendering logic */ }
 			{ gallery_images &&
 				gallery_images.map( ( image ) => (
-					<img key={ image.id } src={ image.url } alt={ image.alt } />
+					<img key={ image.id } src={ image.url } alt={ image.alt} className={`${gallery_columns} ` } />
 				) ) }
 		</div>
 	);

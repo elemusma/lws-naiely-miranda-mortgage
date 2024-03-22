@@ -103,6 +103,7 @@ echo '<div class="text-center bg-light" style="padding:15px 0px;">';
 echo '</div>';
 echo '</footer>';
 
+echo codeFooter();
 // if(get_field('footer', 'options')) { the_field('footer', 'options'); }
 // if(get_field('footer_code')) { the_field('footer_code'); }
 

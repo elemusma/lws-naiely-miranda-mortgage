@@ -41,6 +41,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import MyTextComponent from './MyTextComponent';
+
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -77,7 +79,11 @@ function Edit({
     row_id,
     col_style,
     col_class,
-    col_id
+    col_id,
+    col_code,
+    col_code_style,
+    col_code_class,
+    col_code_id
   } = attributes;
   const [value, setValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)('');
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
@@ -139,7 +145,13 @@ function Edit({
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Code Block'),
     initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    label: "Code Block",
+    value: section_block,
+    onChange: nextValue => setAttributes({
+      section_block: nextValue
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     style: {
       lineHeight: '2'
     }
@@ -216,6 +228,27 @@ function Edit({
     onChange: nextValue => setAttributes({
       col_id: nextValue
     })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Column Code'),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    label: "Column Code Style",
+    value: col_code_style,
+    onChange: nextValue => setAttributes({
+      col_code_style: nextValue
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    label: "Column Code Class",
+    value: col_code_class,
+    onChange: nextValue => setAttributes({
+      col_code_class: nextValue
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    label: "Column Code ID",
+    value: col_code_id,
+    onChange: nextValue => setAttributes({
+      col_code_id: nextValue
+    })
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
@@ -231,21 +264,22 @@ function Edit({
       marginRight: '20px',
       width: '50%'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {
-    allowedBlocks: ['content-block'] // Set the allowed blocks for left column
-    ,
-    templateLock: "all",
-    template: [['content-block']] // Define template for left column
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       flex: '1',
       width: '50%'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {
-    allowedBlocks: ['two-columns'] // Set the allowed blocks for right column
-    ,
-    templateLock: "all",
-    template: [['two-columns']] // Define template for right column
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
+    id: "colCodeTextarea",
+    value: attributes.col_code,
+    onChange: event => setAttributes({
+      col_code: event.target.value
+    }),
+    placeholder: "Enter your code here",
+    style: {
+      width: '100%',
+      height: '100px'
+    }
   })))));
 }
 
@@ -319,6 +353,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -326,6 +362,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
+
 
 
 /**
@@ -337,10 +374,40 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {Element} Element to render.
  */
-function save() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, 'Two Columns – hello from the saved content!');
+function save({
+  attributes
+}) {
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...blockProps
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
+    className: `position-relative ${attributes.section_class}`,
+    style: `padding:100px 0;${attributes.section_style}`,
+    id: attributes.section_id
+  }, attributes.section_image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: attributes.section_image,
+    alt: "",
+    className: `w-100 h-100 position-absolute bg-img ${attributes.section_image_class}`,
+    style: `top:0;left:0;object-fit:cover;pointer-events:none;${attributes.section_image_style}`
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.RawHTML, null, attributes.section_block), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: attributes.container_class,
+    style: attributes.container_style,
+    id: attributes.container_id
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: attributes.row_class,
+    style: attributes.row_style,
+    id: attributes.row_id
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: attributes.col_class,
+    style: attributes.col_style,
+    id: attributes.col_id,
+    "data-aos": "fade-up"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: attributes.col_code_class,
+    style: attributes.col_code_style,
+    id: attributes.col_code_id,
+    "data-aos": "fade-up"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.RawHTML, null, attributes.col_code))))));
 }
 
 /***/ }),
@@ -435,7 +502,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/two-columns","version":"0.1.0","title":"Two Columns","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"attributes":{"section_style":{"type":"string","default":""},"section_class":{"type":"string","default":""},"section_id":{"type":"string","default":""},"section_image":{"type":"string","default":null},"section_image_class":{"type":"string"},"section_image_style":{"type":"string"},"section_block":{"type":"string","default":""},"container_style":{"type":"string","default":""},"container_class":{"type":"string","default":"container"},"container_id":{"type":"string","default":""},"row_style":{"type":"string","default":""},"row_class":{"type":"string","default":"row justify-content-center"},"row_id":{"type":"string","default":""},"col_style":{"type":"string","default":""},"col_class":{"type":"string","default":"col-lg-6"},"col_id":{"type":"string","default":""},"col_right_style":{"type":"string","default":""},"col_right_class":{"type":"string","default":"col-lg-6"},"col_right_id":{"type":"string","default":""}},"textdomain":"two-columns","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/two-columns","version":"0.1.0","title":"Two Columns","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"attributes":{"section_style":{"type":"string","default":""},"section_class":{"type":"string","default":""},"section_id":{"type":"string","default":""},"section_image":{"type":"string","default":null},"section_image_class":{"type":"string"},"section_image_style":{"type":"string"},"section_block":{"type":"string","default":""},"container_style":{"type":"string","default":""},"container_class":{"type":"string","default":"container"},"container_id":{"type":"string","default":""},"row_style":{"type":"string","default":""},"row_class":{"type":"string","default":"row justify-content-center"},"row_id":{"type":"string","default":""},"col_style":{"type":"string","default":""},"col_class":{"type":"string","default":"col-lg-6"},"col_id":{"type":"string","default":""},"col_code":{"type":"string","default":""},"col_code_style":{"type":"string","default":""},"col_code_class":{"type":"string","default":"col-lg-6"},"col_code_id":{"type":"string","default":""}},"textdomain":"two-columns","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

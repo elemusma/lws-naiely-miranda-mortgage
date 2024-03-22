@@ -74,15 +74,19 @@
       "type": "string",
       "default": ""
     },
-    "col_right_style": {
+    "col_code": {
       "type": "string",
       "default": ""
     },
-    "col_right_class": {
+    "col_code_style": {
+      "type": "string",
+      "default": ""
+    },
+    "col_code_class": {
       "type": "string",
       "default": "col-lg-6"
     },
-    "col_right_id": {
+    "col_code_id": {
       "type": "string",
       "default": ""
     }

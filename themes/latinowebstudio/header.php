@@ -28,25 +28,28 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
 
 // if(get_field('custom_css')) { 
 
-echo '<style>';
+// echo '<style>';
 
 // the_field('custom_css');
 
-echo '</style>';
+// echo '</style>';
 
 // }
+
+echo codeHeader();
+
 wp_head(); 
 
 echo '</head>';
 echo '<body '; 
 body_class(); 
 echo '>';
-
+echo codeBody();
 // if(get_field('body','options')) { the_field('body','options'); }
 // if(get_field('body_code')) { the_field('body_code'); }
 
 echo '<div class="blank-space"></div>';
-echo '<header class="position-relative pt-3 pb-3 z-3 box-shadow bg-accent w-100" style="top:0;left:0;">';
+echo '<header class="position-relative z-3 box-shadow bg-accent w-100" style="top:0;left:0;">';
 
 echo '<div class="nav">';
 echo '<div class="container">';
@@ -55,7 +58,9 @@ echo '<div class="row align-items-center">';
 echo '<div class="col-lg-4 col-md-6 col-8 text-center">';
 
 echo '<a href="' . home_url() . '">';
+echo '<div class="" id="logo-main" style="width:100%;transition:all 1s ease-in-out;">';
 echo logoSVG();
+echo '</div>';
 echo '</a>';
 echo '</div>';
 echo '<div class="col-lg-8 col-6 text-center mobile-hidden">';
@@ -80,14 +85,16 @@ echo '</div>';
 echo '<div id="navMenuOverlay" class="position-fixed z-2"></div>';
 echo '<div class="col-lg-4 col-md-8 col-11 nav-items bg-accent desktop-hidden" id="navItems">';
 
-echo '<div class="pt-5 pb-5">';
+echo '<div class="" style="padding-top:55px;padding-bottom:25px;">';
 echo '<div class="close-menu">';
 echo '<div>';
 echo '<span id="navMenuClose" class="close h2 text-white" style="float:right;">X</span>';
 echo '</div>';
 echo '</div>';
 echo '<a href="' . home_url() . '">';
+echo '<div class="" id="" style="width:225px;">';
 echo logoSVG();
+echo '</div>';
 echo '</a>';
 echo '</div>';
 wp_nav_menu(array(
